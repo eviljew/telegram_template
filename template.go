@@ -20,7 +20,7 @@ type Template struct {
 type LangTemplates map[Lang]*Template
 
 func New(name string, lng Lang, data []*Data) (*Template, error) {
-	file, err := os.Open("templates/" + name + ".txt")
+	file, err := os.Open("/templates/" + name + ".txt")
 	if err != nil {
 		return nil, err
 	}
