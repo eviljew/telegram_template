@@ -20,6 +20,7 @@ type Template struct {
 type LangTemplates map[Lang]*Template
 
 func New(name string, lng Lang, data []*Data) (*Template, error) {
+	// очень важно, чтобы папка с шаблонами была в корне
 	file, err := os.Open("templates/" + name + ".txt")
 	if err != nil {
 		return nil, err
