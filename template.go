@@ -100,6 +100,7 @@ func (t *Template) AddData(d ...*Data) {
 	t.setData(d)
 }
 
+// функция добавления кнопок в шаблон
 func (t *Template) AddButtons(b ...*Button) {
 	t.AddButtons(b...)
 }
