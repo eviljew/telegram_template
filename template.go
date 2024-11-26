@@ -39,7 +39,7 @@ func New(name string, lng Lang, data []*Data) (*Template, error) {
 
 	tmpl := &Template{
 		Text:    text,
-		Buttons: make(map[int]*Button, 0),
+		Buttons: make(map[int]*Button),
 	}
 
 	tmpl.setData(data)
