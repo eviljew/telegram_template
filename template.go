@@ -100,6 +100,10 @@ func (t *Template) AddData(d ...*Data) {
 	t.setData(d)
 }
 
+func (t *Template) AddButtons(b ...*Button) {
+	t.AddButtons(b...)
+}
+
 func (t *Template) SetPhotoURL(photoURL string) {
 	t.PhotoURL = photoURL
 }
@@ -139,5 +143,11 @@ func (t *Template) setButtons() {
 func (t *Template) setData(data []*Data) {
 	for _, el := range data {
 		t.Text = ReplaceReText(t.Text, el.Pattern, el.Replacement)
+	}
+}
+
+func (t *Template) addButton(buttons []*Button) {
+	for _, el := range buttons {
+		t.Buttons[el.ID] = el
 	}
 }
