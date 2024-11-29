@@ -56,15 +56,15 @@ func (t *Template) PrepareKeyboardMarkup() *tgbotapi.InlineKeyboardMarkup {
 	}
 
 	// сортирую кнопки по id
-	keys := make([]int, 0, len(t.Buttons))
+	btnKeys := make([]int, 0, len(t.Buttons))
 	for id := range t.Buttons {
-		keys = append(keys, id)
+		btnKeys = append(btnKeys, id)
 	}
-	sort.Ints(keys)
+	sort.Ints(btnKeys)
 
 	keyboard := make(map[int][]tgbotapi.InlineKeyboardButton)
-	for idx := range keys {
-		btn := t.Buttons[keys[idx]]
+	for idx := range btnKeys {
+		btn := t.Buttons[btnKeys[idx]]
 
 		if btn.Visible == VisibleOff {
 			continue
@@ -85,8 +85,16 @@ func (t *Template) PrepareKeyboardMarkup() *tgbotapi.InlineKeyboardMarkup {
 	}
 
 	kbdmkp := make([][]tgbotapi.InlineKeyboardButton, 0)
-	for _, row := range keyboard {
-		kbdmkp = append(kbdmkp, row)
+
+	// сортирую строки кнопок по id
+	rowKeys := make([]int, 0, len(keyboard))
+	for idx := range keyboard {
+		rowKeys = append(rowKeys, idx)
+	}
+	sort.Ints(rowKeys)
+
+	for idx := range rowKeys {
+		kbdmkp = append(kbdmkp, tgbotapi.NewInlineKeyboardRow(keyboard[idx]...))
 	}
 
 	if len(keyboard) != 0 {
@@ -101,7 +109,6 @@ func (t *Template) AddData(d ...*Data) {
 	t.setData(d)
 }
 
-// функция добавления кнопок в шаблон
 func (t *Template) AddButtons(b ...*Button) {
 	t.AddButtons(b...)
 }
