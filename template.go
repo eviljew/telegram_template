@@ -84,17 +84,19 @@ func (t *Template) PrepareKeyboardMarkup() *tgbotapi.InlineKeyboardMarkup {
 		}
 	}
 
-	kbdmkp := make([][]tgbotapi.InlineKeyboardButton, 0, len(keyboard))
-
 	// сортирую строки кнопок по id
-	rowKeys := make([]int, 0, len(keyboard))
+	rowKeys := make([]int, len(keyboard))
 	for idx := range keyboard {
 		rowKeys = append(rowKeys, idx)
 	}
 	sort.Ints(rowKeys)
 
-	for idx := range rowKeys {
-		kbdmkp[idx] = tgbotapi.NewInlineKeyboardRow(keyboard[idx]...)
+	kbdmkp := make([][]tgbotapi.InlineKeyboardButton, 0)
+
+	for _, idx := range rowKeys {
+		if len(keyboard[idx]) != 0 {
+			kbdmkp = append(kbdmkp, keyboard[idx])
+		}
 	}
 
 	if len(keyboard) != 0 {
