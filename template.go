@@ -112,7 +112,7 @@ func (t *Template) AddData(d ...*Data) {
 }
 
 func (t *Template) AddButtons(b ...*Button) {
-	t.AddButtons(b...)
+	t.addButton(b)
 }
 
 func (t *Template) SetPhotoURL(photoURL string) {
